@@ -218,6 +218,7 @@ function LoginPage({
                 >
                   Mag-login
                 </button>
+                <h1>Dumango</h1>
               </p>
             </>
           )}
