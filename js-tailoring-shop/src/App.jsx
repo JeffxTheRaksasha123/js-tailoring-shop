@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import CustomerPage from "./pages/CustomerPage";
 import AdminPage from "./pages/AdminPage";
 import initialServices from "./data/serviceData";
+import { API } from "./api";
 
 // FIREBASE
 import { auth, googleProvider, db } from "./firebase";
@@ -108,7 +109,7 @@ function App() {
     setLoginError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const res = await fetch(`${API}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -134,7 +135,7 @@ function App() {
     setLoginError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch(`${API}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, username, password }),
@@ -193,7 +194,7 @@ function App() {
   const fetchMyReservations = async () => {
     if (!currentUser) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/reservations/${currentUser.id}`);
+      const res = await fetch(`${API}/reservations/${currentUser.id}`);
       const data = await res.json();
       setMyReservations(data);
     } catch (err) {
@@ -214,7 +215,7 @@ function App() {
     };
 
     try {
-      await fetch("http://localhost:5000/api/reservations", {
+      await fetch(`${API}/reservations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newReservation),
